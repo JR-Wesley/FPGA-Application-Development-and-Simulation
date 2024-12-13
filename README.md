@@ -1,4 +1,23 @@
-# 《FPGA应用开发和仿真》源码和勘误表
+# Refactoring version of 《FPGA应用开发和仿真》
+
+## Overview
+
+**Purpose**:
+This repository is dedicated to refactoring the codebase to improve its structure and modularity.
+The original code is written primarily for publication without a good coding style.
+After learning the book and using the code for development, I decide to organize the code for better maintainability and re-usability.
+
+**Key Feature:**
+- Avoiding using behavior description. RTL Code reflects what circuit looks like.
+- Replace synchronous reset with asynchronous `rst_n`.
+- Reorganized Code into logical modules for better separation of concerns. One Module in one file. And better file hierarchy.
+- Formatted with `Verible` and `Verilator` linting. Compilation commands using `iverilog`, `Verilator` in Linux.
+- Comments on the compiler or platform dependency.
+
+**Status**:
+This branch is under active development. You are welcomed to follow and contribute.
+More details or the principle of digital design can be referred to this book.
+
 
 ## 说明
 
