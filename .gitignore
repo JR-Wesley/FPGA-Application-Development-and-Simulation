@@ -1,3 +1,5 @@
+**/*.vcd
+
 **/.DS_Store
 **/*.bak
 **/*.bkp
