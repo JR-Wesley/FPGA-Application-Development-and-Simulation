@@ -6,7 +6,7 @@
 module TestMemSine;
 
   initial begin
-    $dumpfile("TestMemSine.vcd");
+    $dumpfile("TestMemSine.fst");
     $dumpvars(0, TestMemSine);
   end
 

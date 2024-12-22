@@ -19,7 +19,7 @@ After learning the book and using the code for development, I decide to organize
 This branch is under active development. You are welcomed to follow and contribute.
 More details or the principle of digital design can be referred to this book.
 
-## Notes
+## Coding Notes
 
 This section will cover some usage of `SystemVerilog` syntax of concern.
 
@@ -93,6 +93,11 @@ logic [3 : 0][7 : 0] data; // packed array
 ### Special
 
 ### Tools
+
+## Simulation Guide
+
+This repository adds a definitive (try my best) guide for simulation.
+I believe the basic tools and infrastructure for design and simulation is vital because it can make the process of development and debugging faster.
 
 ## Illustration
 

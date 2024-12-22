@@ -6,7 +6,7 @@
 module TestMem;
 
   initial begin
-    $dumpfile("TestMem.vcd");
+    $dumpfile("TestMem.fst");
     $dumpvars(0, TestMem);
   end
 

@@ -5,7 +5,7 @@
 
 module TestCntSecMinHr;
   initial begin
-    $dumpfile("TestCntSecMinHr.vcd");
+    $dumpfile("TestCntSecMinHr.fst");
     $dumpvars(0, TestCntSecMinHr);
   end
 

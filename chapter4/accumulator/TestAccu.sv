@@ -6,7 +6,7 @@
 
 module TestAccu;
   initial begin
-    $dumpfile("TestAccu.vcd");
+    $dumpfile("TestAccu.fst");
     $dumpvars(0, TestAccu);
   end
 

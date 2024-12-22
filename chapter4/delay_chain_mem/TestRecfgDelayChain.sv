@@ -5,7 +5,7 @@
 
 module TestRecfgDelayChain;
   initial begin
-    $dumpfile("TestRecfgDelayChain.vcd");
+    $dumpfile("TestRecfgDelayChain.fst");
     $dumpvars(0, TestRecfgDelayChain);
   end
 

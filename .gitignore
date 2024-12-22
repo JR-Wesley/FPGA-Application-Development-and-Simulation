@@ -1,4 +1,8 @@
-**/*.vcd
+**/Makefile
+**/*.ivo
+
+**/sim/
+!sim_guide/**
 
 **/.DS_Store
 **/*.bak

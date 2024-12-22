@@ -5,7 +5,7 @@
 
 module TestCounter;
   initial begin
-    $dumpfile("TestCounter.vcd");
+    $dumpfile("TestCounter.fst");
     $dumpvars(0, TestCounter);
   end
 
