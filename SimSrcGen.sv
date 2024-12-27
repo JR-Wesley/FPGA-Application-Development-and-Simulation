@@ -10,7 +10,7 @@ package SimSrcGen;
   endtask
 
   task automatic GenRstn(ref logic clk, ref logic rst_n, input int start, input int duration);
-    rst_n = 1'b1;
+    rst_n = 1'b0;
     repeat (start) @(posedge clk);
     rst_n = 1'b0;
     repeat (duration) @(posedge clk);
@@ -18,7 +18,7 @@ package SimSrcGen;
   endtask
 
   task automatic GenRst(ref logic clk, ref logic rst, input int start, input int duration);
-    rst = 1'b0;
+    rst = 1'b1;
     repeat (start) @(posedge clk);
     rst = 1'b1;
     repeat (duration) @(posedge clk);

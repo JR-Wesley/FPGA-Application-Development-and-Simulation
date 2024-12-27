@@ -5,60 +5,52 @@
 
 // improved output behavior (just like scfifo2)
 module DelayChainMem #(
-    parameter integer DW  = 8,
-    parameter integer LEN = 32
+    parameter int unsigned DW   = 8,
+    parameter int unsigned LEN  = 4,
+    parameter type         dw_t = logic [         DW - 1 : 0],
+    parameter type         aw_t = logic [$clog2(LEN) - 1 : 0]
 ) (
-  input  wire               clk,
-  input  wire               rst_n,
-  input  wire               en,
-  input  wire  [DW - 1 : 0] din,
-  output logic [DW - 1 : 0] dout
+    input  logic clk,
+    input  logic rst_n,
+    input  logic en,
+    input  dw_t  din,
+    output dw_t  dout
 );
+  `define FFARNE(__q, __d, __en, __clk, __arst_n) \
+  always_ff @(posedge (__clk), negedge (__arst_n)) begin \
+    if (!__arst_n) __q <= '0; \
+    if (__en) __q <= (__d); \
+  end
 
   generate
     if (LEN == 0) begin : g_zero_delay
       assign dout = din;
 
     end else if (LEN == 1) begin : g_one_delay
-      always_ff @(posedge clk, negedge rst_n) begin
-        if (!rst_n) dout <= '0;
-        else if (en) dout <= din;
-      end
+      `FFARNE(dout, din, 1'b1, clk, rst_n)
 
     end else begin : g_delay
       // NOTE: logic improved
       // When `en` is clear, the output should be zero.
       logic en_dly;
-      always_ff @(posedge clk, negedge rst_n) begin
-        if (!rst_n) en_dly <= '0;
-        else en_dly <= en;
-      end
+      `FFARNE(en_dly, en, 1'b1, clk, rst_n)
 
-      logic [$clog2(LEN) - 1 : 0] addr;
-      logic [DW - 1:0] ram_out, ram_out_dly;
+      aw_t addr;
+      dw_t ram_out, ram_out_dly;
+      logic we = en;
       SpRamRf #(
           .DW(DW),
           .WORDS(LEN)
       ) theRam (
-          .clk (clk),
-          .addr(addr),
-          .we  (en),
-          .din (din),
+          .*,
           .qout(ram_out)
       );
-
-      always_ff @(posedge clk, negedge rst_n) begin
-        if (!rst_n) ram_out_dly <= '0;
-        else if (en_dly) ram_out_dly <= ram_out;
-      end
+      `FFARNE(ram_out_dly, ram_out, en_dly, clk, rst_n)
       assign dout = en_dly ? ram_out : ram_out_dly;
 
-      logic [$clog2(LEN) - 1 : 0] addr_next;
+      aw_t addr_next;
       assign addr_next = (addr < LEN - 2) ? addr + 1'b1 : '0;
-      always_ff @(posedge clk, negedge rst_n) begin
-        if (!rst_n) addr <= '0;
-        else if (en) addr <= addr_next;
-      end
+      `FFARNE(addr, addr_next, en, clk, rst_n)
 
     end
   endgenerate

@@ -2,7 +2,7 @@
 `define _R2SDFDEFINES_SV__
 
 package R2SdfDefinesPkg;
-  localparam DW = 16, FW = DW - 1;
+  localparam int DW = 16, FW = DW - 1;
 
   typedef struct {
     logic signed [DW-1:0] re;

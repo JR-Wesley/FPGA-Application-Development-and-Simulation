@@ -32,7 +32,7 @@ This section will cover some usage of `SystemVerilog` syntax of concern.
 
 For `task` is not supported in `iverilog`, the initialization of `clk` and `rst_n` is replaced using `initial` block.
 
-### Combinational circular in `AccuM.sv`
+### `always_comb` vs. `assign`
 
 ### `$random`
 
@@ -98,6 +98,8 @@ logic [3 : 0][7 : 0] data; // packed array
 
 This repository adds a definitive (try my best) guide for simulation.
 I believe the basic tools and infrastructure for design and simulation is vital because it can make the process of development and debugging faster.
+
+I also add the waveform after simulation in each project directory for better understanding of the circuit.
 
 ## Illustration
 

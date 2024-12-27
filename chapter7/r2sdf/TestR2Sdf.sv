@@ -14,9 +14,9 @@ module TestR2Sdf;
   import SimSrcGen::*;
   import R2SdfDefinesPkg::*;
 
-  logic clk, rst;
+  logic clk, rst_n;
   initial GenClk(clk, 8, 10);
-  initial GenRst(clk, rst, 2, 2);
+  initial GenRstn(clk, rst_n, 2, 2);
 
   localparam int STG = 4, LEN = 2 ** STG;
   Cplx x[LEN];
@@ -34,24 +34,25 @@ module TestR2Sdf;
   wire isync = cnt == '1;
 
   R2Sdf #(STG) theR2Sdf (
-      clk,
-      rst,
-      1'b1,
-      sc,
-      inv,
-      x[cnt],
-      isync,
-      out,
-      osync
+      .clk     (clk),
+      .rst_n   (rst_n),
+      .en      (1'b1),
+      .scale   (sc),
+      .invexp  (inv),
+      .in      (x[cnt]),
+      .in_sync (isync),
+      .out     (out),
+      .out_sync(osync)
   );
 
-  always @(posedge clk) begin
-    if (rst) cnt <= '0;
+  always @(posedge clk, negedge rst_n) begin
+    if (!rst_n) cnt <= '0;
     else cnt <= cnt + 1'b1;
   end
 
   logic [STG - 1 : 0] dicnt = '0;
-  always @(posedge clk) begin
+  always @(posedge clk, negedge rst_n) begin
+    if (!rst_n) dicnt <= '0;
     if (osync) dicnt <= '0;
     else dicnt <= dicnt + 1'b1;
   end

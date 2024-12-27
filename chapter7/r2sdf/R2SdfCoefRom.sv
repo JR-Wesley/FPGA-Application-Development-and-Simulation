@@ -20,7 +20,9 @@ module R2SdfCoefRom #(
     end
   end
 
-  always_ff @(posedge clk) qout <= ram[addr];
+  always_ff @(posedge clk) begin
+    qout <= ram[addr];
+  end
 
 endmodule
 

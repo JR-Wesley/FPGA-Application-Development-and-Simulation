@@ -2,14 +2,15 @@
 `define __DELAY_CHAIN_SV__
 
 module DelayChain #(
-    parameter integer DW  = 8,
-    parameter integer LEN = 4
+    parameter int unsigned DW   = 8,
+    parameter int unsigned LEN  = 4,
+    parameter type         dw_t = logic [DW - 1 : 0]
 ) (
-  input  wire               clk,
-  input  wire               rst_n,
-  input  wire               en,
-  input  wire  [DW - 1 : 0] in,
-  output logic [DW - 1 : 0] out
+    input  logic clk,
+    input  logic rst_n,
+    input  logic en,
+    input  dw_t  in,
+    output dw_t  out
 );
 
   generate
@@ -17,7 +18,7 @@ module DelayChain #(
       assign out = in;
 
     end else if (LEN == 1) begin : g_one_delay
-      logic [DW - 1 : 0] dly;
+      dw_t dly;
       always_ff @(posedge clk, negedge rst_n) begin
         if (!rst_n) dly <= '0;
         else if (en) dly <= in;

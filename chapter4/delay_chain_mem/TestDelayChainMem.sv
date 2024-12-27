@@ -5,10 +5,7 @@
 `default_nettype none
 
 module TestDelayChainMem;
-  initial begin
-    $dumpfile("TestDelayChainMem.fst");
-    $dumpvars(0, TestDelayChainMem);
-  end
+  initial $dumpvars(0, TestDelayChainMem);
 
   logic clk = 1'b0;
   logic rst_n = 1'b0;
@@ -32,22 +29,18 @@ module TestDelayChainMem;
       .DW(8),
       .LEN(5)
   ) dcmempre (
-      .clk  (clk),
-      .rst_n(rst_n),
-      .en   (en),
-      .din  (a),
-      .dout (y_unopt)
+      .*,
+      .din (a),
+      .dout(y_unopt)
   );
 
   DelayChainMem #(
       .DW(8),
       .LEN(5)
   ) dcmem (
-      .clk  (clk),
-      .rst_n(rst_n),
-      .en   (en),
-      .din  (a),
-      .dout (y)
+      .*,
+      .din (a),
+      .dout(y)
   );
 
 endmodule

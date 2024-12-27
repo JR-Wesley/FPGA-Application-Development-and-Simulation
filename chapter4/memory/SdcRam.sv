@@ -3,18 +3,20 @@
 
 // Simple double clock RAM
 module SdcRam #(
-    parameter integer DW    = 8,
-    parameter integer WORDS = 256
+    parameter int unsigned WORDS = 256,
+    parameter int unsigned DW    = 8,
+    parameter type         aw_t  = logic [$clog2(WORDS) - 1 : 0],
+    parameter type         dw_t  = logic [           DW - 1 : 0]
 ) (
-  // write port
-  input  wire                          clk_a,
-  input  wire  [$clog2(WORDS) - 1 : 0] addr_a,
-  input  wire                          wr_a,
-  input  wire  [           DW - 1 : 0] din_a,
-  // read port
-  input  wire                          clk_b,
-  input  wire  [$clog2(WORDS) - 1 : 0] addr_b,
-  output logic [           DW - 1 : 0] qout_b
+    // write port
+    input  logic clk_a,
+    input  aw_t  addr_a,
+    input  logic wr_a,
+    input  dw_t  din_a,
+    // read port
+    input  logic clk_b,
+    input  aw_t  addr_b,
+    output dw_t  qout_b
 );
 
   logic [WORDS - 1 : 0][DW - 1 : 0] ram;
