@@ -2,7 +2,7 @@
 `define __FALLING2EN_SV__
 
 module Falling2En #(
-    parameter int unsigned SYNC_STG = 1
+    parameter int SYNC_STG = 1
 ) (
   input  logic clk,
   input  logic in,
@@ -11,11 +11,23 @@ module Falling2En #(
 );
 
   logic [SYNC_STG : 0] dly;
-  always_ff @(posedge clk) begin
-    dly <= {dly[SYNC_STG-1 : 0], in};
-  end
+  generate
+    if (SYNC_STG == 0) begin : g_reg
+      always_ff @(posedge clk) begin
+        dly <= in;
+      end
+      assign en = {dly, in} == 2'b10;
 
-  assign en = (SYNC_STG ? dly[SYNC_STG-:2] : {dly, in}) == 2'b10;
+    end else begin : g_chain
+      always_ff @(posedge clk) begin
+        dly <= {dly[SYNC_STG-1 : 0], in};
+      end
+      assign en = dly[SYNC_STG-:2] == 2'b10;
+
+    end
+  endgenerate
+
+  // assign en = (SYNC_STG ? dly[SYNC_STG-:2] : {dly, in}) == 2'b10;
   assign out = dly[SYNC_STG];
 
 endmodule
