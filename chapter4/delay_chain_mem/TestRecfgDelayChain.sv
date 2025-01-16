@@ -55,16 +55,16 @@ module TestRecfgDelayChain;
   end
 
   RecfgDelayChain #(
-      .DW(DW),
+      .DW     (DW),
       .MAX_LEN(16),
       .MIN_LEN(0)
   ) dc (
-      .clk   (clk),
-      .rst_n (rst_n),
-      .en    (en),
-      .length(len),
-      .din   (a),
-      .dout  (y)
+    .clk   (clk),
+    .rst_n (rst_n),
+    .en    (en),
+    .length(len),
+    .din   (a),
+    .dout  (y)
   );
 
 endmodule

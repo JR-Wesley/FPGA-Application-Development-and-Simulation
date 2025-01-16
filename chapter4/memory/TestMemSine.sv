@@ -1,24 +1,12 @@
 `timescale 1ns / 100ps
 `include "./SpRamRfSine.sv"
 
-`default_nettype none
-
 module TestMemSine;
-
-  initial begin
-    $dumpfile("TestMemSine.fst");
-    $dumpvars(0, TestMemSine);
-  end
+  initial $dumpvars(0, TestMemSine);
+  initial #50000 $finish;
 
   logic clk = 1'b0;
-  initial begin
-    forever #5 clk = ~clk;
-  end
-
-  initial begin
-    #50000;
-    $finish;
-  end
+  initial forever #5 clk = ~clk;
 
   logic [7 : 0] a = 0, d = 0;
   logic [7 : 0] q;
@@ -37,11 +25,11 @@ module TestMemSine;
   end
 
   SpRamRfSine theMem (
-      .clk (clk),
-      .addr(a),
-      .we  (we),
-      .din (d),
-      .qout(q)
+    .clk (clk),
+    .addr(a),
+    .we  (we),
+    .din (d),
+    .qout(q)
   );
 
 endmodule

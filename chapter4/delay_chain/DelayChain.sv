@@ -2,15 +2,15 @@
 `define __DELAY_CHAIN_SV__
 
 module DelayChain #(
-    parameter int unsigned DW   = 8,
-    parameter int unsigned LEN  = 4,
-    parameter type         dw_t = logic [DW - 1 : 0]
+    parameter int  DW   = 8,
+    parameter int  LEN  = 4,
+    parameter type dw_t = logic [DW - 1 : 0]
 ) (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic en,
-    input  dw_t  in,
-    output dw_t  out
+  input  logic clk,
+  input  logic rst_n,
+  input  logic en,
+  input  dw_t  in,
+  output dw_t  out
 );
 
   generate

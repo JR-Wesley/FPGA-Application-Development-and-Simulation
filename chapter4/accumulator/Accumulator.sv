@@ -5,11 +5,11 @@ module Accumulator #(
     parameter int  DW   = 8,
     parameter type dw_t = logic [DW - 1 : 0]
 ) (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic en,
-    input  dw_t  d,
-    output dw_t  acc
+  input  logic clk,
+  input  logic rst_n,
+  input  logic en,
+  input  dw_t  d,
+  output dw_t  acc
 );
 
   dw_t acc_next;

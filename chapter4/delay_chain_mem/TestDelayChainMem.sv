@@ -26,21 +26,21 @@ module TestDelayChainMem;
   initial forever #10 a = 8'($urandom());
 
   DelayChainMemPre #(
-      .DW(8),
+      .DW (8),
       .LEN(5)
   ) dcmempre (
-      .*,
-      .din (a),
-      .dout(y_unopt)
+    .*,
+    .din (a),
+    .dout(y_unopt)
   );
 
   DelayChainMem #(
-      .DW(8),
+      .DW (8),
       .LEN(5)
   ) dcmem (
-      .*,
-      .din (a),
-      .dout(y)
+    .*,
+    .din (a),
+    .dout(y)
   );
 
 endmodule

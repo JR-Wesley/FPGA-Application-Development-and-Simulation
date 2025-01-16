@@ -18,12 +18,12 @@ module TestDelayChain;
   initial forever #10 a = DW'($urandom());
 
   DelayChain #(
-      .DW(8),
+      .DW (8),
       .LEN(5)
   ) dc (
-      .*,
-      .in (a),
-      .out(y)
+    .*,
+    .in (a),
+    .out(y)
   );
 
 endmodule

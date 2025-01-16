@@ -2,14 +2,14 @@
 `define __ACCUM_SV__
 
 module AccuM #(
-    parameter int unsigned M    = 100,
-    parameter type         dw_t = logic [$clog2(M) - 1 : 0]
+    parameter int  M    = 100,
+    parameter type dw_t = logic [$clog2(M) - 1 : 0]
 ) (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic en,
-    input  dw_t  dm,
-    output dw_t  accm
+  input  logic clk,
+  input  logic rst_n,
+  input  logic en,
+  input  dw_t  dm,
+  output dw_t  accm
 );
 
   dw_t acc_next;

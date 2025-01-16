@@ -5,16 +5,16 @@
 
 // improved output behavior (just like scfifo2)
 module DelayChainMem #(
-    parameter int unsigned DW   = 8,
-    parameter int unsigned LEN  = 4,
-    parameter type         dw_t = logic [         DW - 1 : 0],
-    parameter type         aw_t = logic [$clog2(LEN) - 1 : 0]
+    parameter int  DW   = 8,
+    parameter int  LEN  = 4,
+    parameter type dw_t = logic [         DW - 1 : 0],
+    parameter type aw_t = logic [$clog2(LEN) - 1 : 0]
 ) (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic en,
-    input  dw_t  din,
-    output dw_t  dout
+  input  logic clk,
+  input  logic rst_n,
+  input  logic en,
+  input  dw_t  din,
+  output dw_t  dout
 );
   `define FFARNE(__q, __d, __en, __clk, __arst_n) \
   always_ff @(posedge (__clk), negedge (__arst_n)) begin \
@@ -37,13 +37,13 @@ module DelayChainMem #(
 
       aw_t addr;
       dw_t ram_out, ram_out_dly;
-      logic we = en;
       SpRamRf #(
-          .DW(DW),
+          .DW   (DW),
           .WORDS(LEN)
       ) theRam (
-          .*,
-          .qout(ram_out)
+        .*,
+        .we  (en),
+        .qout(ram_out)
       );
       `FFARNE(ram_out_dly, ram_out, en_dly, clk, rst_n)
       assign dout = en_dly ? ram_out : ram_out_dly;

@@ -2,15 +2,15 @@
 `define __COUNTER_MAX_SV__
 
 module CounterMax #(
-    parameter int unsigned DW   = 100,
-    parameter type         dw_t = logic [DW - 1 : 0]
+    parameter int  DW   = 100,
+    parameter type dw_t = logic [DW - 1 : 0]
 ) (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic en,
-    input  dw_t  max,
-    output dw_t  cnt,
-    output logic co
+  input  logic clk,
+  input  logic rst_n,
+  input  logic en,
+  input  dw_t  max,
+  output dw_t  cnt,
+  output logic co
 );
 
   dw_t cnt_inc;

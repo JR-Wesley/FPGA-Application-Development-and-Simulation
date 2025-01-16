@@ -1,24 +1,12 @@
 `timescale 1ns / 100ps
 `include "./SpRamRf.sv"
 
-`default_nettype none
-
 module TestMem;
-
-  initial begin
-    $dumpfile("TestMem.fst");
-    $dumpvars(0, TestMem);
-  end
+  initial $dumpvars(0, TestMem);
+  initial #400 $finish;
 
   logic clk = 1'b0;
-  initial begin
-    forever #5 clk = ~clk;
-  end
-
-  initial begin
-    #400;
-    $finish;
-  end
+  initial forever #5 clk = ~clk;
 
   logic [7 : 0] a = 0, d = 0;
   logic [7 : 0] q;
@@ -38,11 +26,11 @@ module TestMem;
   end
 
   SpRamRf theMem (
-      .clk (clk),
-      .addr(a),
-      .we  (we),
-      .din (d),
-      .qout(q)
+    .clk (clk),
+    .addr(a),
+    .we  (we),
+    .din (d),
+    .qout(q)
   );
 
 endmodule
