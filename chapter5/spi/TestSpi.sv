@@ -1,7 +1,6 @@
 `timescale 1ns / 100ps
 
-`include "../common.sv"
-`include "../chapter4/counter.sv"
+`include "../../SimSrcGen.sv"
 
 `default_nettype none
 

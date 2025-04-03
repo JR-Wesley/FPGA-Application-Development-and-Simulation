@@ -26,9 +26,10 @@ package SimSrcGen;
   endtask
 
   task automatic KeyPress(ref logic key, input realtime t);
+    // timescale for simulation
     for (int i = 0; i < 30; i++) begin
-      #0.11ms key = '0;
-      #0.14ms key = '1;
+      #0.11us key = '0;
+      #0.14us key = '1;
     end
     #t;
     key = '0;
